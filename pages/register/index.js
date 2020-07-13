@@ -20,7 +20,7 @@ class Register extends Component {
         
 
         
-        if(window.localStorage.getItem('user')){
+        if(localStorage.getItem('user')){
             window.location.href = '/dashboard'
         }
         else{
@@ -84,9 +84,10 @@ class Register extends Component {
                     <div className="col-xl-12 pa-0">
                         <div className="auth-form-wrap pt-xl-0 pt-70">
                             <div className="auth-form w-xl-30 w-lg-55 w-sm-75 w-100">
-                                <a className="auth-brand text-center d-block mb-20" href="#">
-                                    <img className="brand-img" src="/img/logo-light.png" alt="brand" />
-                                </a>
+                                {/*
+									<a className="auth-brand text-center d-block mb-20" href="#">
+										<img className="brand-img" src="/img/logo-light.png" alt="brand"/>
+									</a>*/}
                                 <form action="javascript:void(0)">
                                     <h1 className="display-4 mb-10 text-center">Sign up for free</h1>
                                     <p className="mb-30 text-center">Create your account and start your free trial today</p>

@@ -18,7 +18,7 @@ class Login extends Component {
         
 
         
-	if(window.localStorage.getItem('user')){
+	if(localStorage.getItem('user')){
 		window.location.href = '/dashboard'
 	}
 	else{
@@ -82,9 +82,10 @@ class Login extends Component {
 						<div className="col-xl-12 pa-0">
 							<div className="auth-form-wrap pt-xl-0 pt-70">
 								<div className="auth-form w-xl-30 w-lg-55 w-sm-75 w-100">
+									{/*
 									<a className="auth-brand text-center d-block mb-20" href="#">
 										<img className="brand-img" src="/img/logo-light.png" alt="brand"/>
-									</a>
+									</a>*/}
 									<form action="javascript:void(0)">
 										<h1 className="display-4 text-center mb-10">Welcome Back :)</h1>
 										<p className="text-center mb-30">Sign in to your account and enjoy unlimited perks.</p> 

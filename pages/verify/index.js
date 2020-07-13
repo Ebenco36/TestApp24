@@ -3,7 +3,7 @@ import Link from 'next/link'
 import {Redirect } from 'react-router-dom'
 import {postData} from '../../services/postData'
 import { History } from 'history';
-import 'localstorage-polyfill'
+import 'localstorage-polyfill';
 //import { LocalStorage } from "node-localstorage";
  
 //global.localStorage = new LocalStorage('./scratch');
@@ -22,6 +22,7 @@ class Verify extends Component {
     }
 
     componentDidMount(){
+        alert("welcom")
         if(localStorage.getItem('user')){
             let user = localStorage.getItem('user');
             this.getUsername();
@@ -58,8 +59,8 @@ class Verify extends Component {
 
     getUsername(){
         let data = localStorage.getItem('user');
-        console.log(JSON.parse(data).email)
-        return JSON.parse(data).email;
+        console.log(JSON.parse(data))
+        return JSON.parse(data);
     }
     onChange(e){
       this.setState({[e.target.name]:e.target.value});
@@ -68,9 +69,7 @@ class Verify extends Component {
     
     render () {
 
-        if(localStorage.getItem('user')){
-        var email = this.getUsername() ? this.getUsername() : '';
-        }
+        var email = this.getUsername() ? this.getUsername(): '';
     return (
       <div className="IndexPage__container hk-wrapper hk-vertical-nav">
       {/* <!--
@@ -97,7 +96,7 @@ class Verify extends Component {
                                             <i className="zmdi zmdi-lock text-light-40 font-12"></i>
                                         </span>
                                     </h1>
-    <p className="mb-30 text-center">{email ? email : ''}</p>
+    <p className="mb-30 text-center">{email}</p>
                                     <div className="form-group">
                                         <div className="input-group">
                                             <input onChange={this.onChange} name="verification_code" className="form-control filled-input bg-white" placeholder="passcode" type="text"/>
