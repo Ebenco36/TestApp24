@@ -22,8 +22,8 @@ class Verify extends Component {
     }
 
     componentDidMount(){
-        if(window.localStorage.getItem('user')){
-            let user = window.localStorage.getItem('user');
+        if(localStorage.getItem('user')){
+            let user = localStorage.getItem('user');
             this.getUsername();
         }
         else{
@@ -92,7 +92,7 @@ class Verify extends Component {
                                     <div className="d-block avatar avatar-lg mx-auto mb-20">
                                         <img src="/img/avatar3.jpg" alt="user" className="avatar-img rounded-circle"/>
                                     </div>
-                                    <h1 className="display-6 mb-10 d-flex align-items-end justify-content-center">{email ? email : ''}
+                                    <h1 className="display-6 mb-10 d-flex align-items-end justify-content-center">{email}
                                         <span className="d-20 d-flex align-items-center justify-content-center border border-1 border-light-40 rounded-circle ml-10">
                                             <i className="zmdi zmdi-lock text-light-40 font-12"></i>
                                         </span>
