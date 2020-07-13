@@ -3,6 +3,11 @@ import Link from 'next/link'
 import {Redirect } from 'react-router-dom'
 import {postData} from '../../services/postData'
 import { History } from 'history';
+import 'localstorage-polyfill'
+//import { LocalStorage } from "node-localstorage";
+ 
+//global.localStorage = new LocalStorage('./scratch');
+
 class Verify extends Component {
     constructor(props, context) {
 
@@ -17,9 +22,6 @@ class Verify extends Component {
     }
 
     componentDidMount(){
-        
-
-        //console.log(window.localStorage.getItem('user'))
         if(window.localStorage.getItem('user')){
             let user = window.localStorage.getItem('user');
             this.getUsername();
@@ -66,7 +68,9 @@ class Verify extends Component {
     
     render () {
 
-        var email = this.getUsername();
+        if(localStorage.getItem('user')){
+        var email = this.getUsername() ? this.getUsername() : '';
+        }
     return (
       <div className="IndexPage__container hk-wrapper hk-vertical-nav">
       {/* <!--
@@ -88,12 +92,12 @@ class Verify extends Component {
                                     <div className="d-block avatar avatar-lg mx-auto mb-20">
                                         <img src="/img/avatar3.jpg" alt="user" className="avatar-img rounded-circle"/>
                                     </div>
-                                    <h1 className="display-6 mb-10 d-flex align-items-end justify-content-center">{email}
+                                    <h1 className="display-6 mb-10 d-flex align-items-end justify-content-center">{email ? email : ''}
                                         <span className="d-20 d-flex align-items-center justify-content-center border border-1 border-light-40 rounded-circle ml-10">
                                             <i className="zmdi zmdi-lock text-light-40 font-12"></i>
                                         </span>
                                     </h1>
-    <p className="mb-30 text-center">{email}</p>
+    <p className="mb-30 text-center">{email ? email : ''}</p>
                                     <div className="form-group">
                                         <div className="input-group">
                                             <input onChange={this.onChange} name="verification_code" className="form-control filled-input bg-white" placeholder="passcode" type="text"/>
