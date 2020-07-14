@@ -3,7 +3,7 @@ import Link from 'next/link'
 import {Redirect } from 'react-router-dom'
 import {postData} from '../../services/postData'
 import { History } from 'history';
-import 'localstorage-polyfill';
+//import 'localstorage-polyfill';
 //import { LocalStorage } from "node-localstorage";
  
 //global.localStorage = new LocalStorage('./scratch');
@@ -14,6 +14,9 @@ class Verify extends Component {
       super(props, context)
       this.state = {
         verification_code:"",
+		token:"",
+		user:""
+		
       }
       this.verify = this.verify.bind(this);
       this.onChange = this.onChange.bind(this);
@@ -22,9 +25,14 @@ class Verify extends Component {
     }
 
     componentDidMount(){
-        alert("welcom")
+        
         if(localStorage.getItem('user')){
-            let user = localStorage.getItem('user');
+            let user_data = localStorage.getItem('user');
+			let token_user = localStorage.getItem('user_token');
+			this.setState({
+				token:token_user,
+				user: user_data
+			});
             this.getUsername();
         }
         else{
@@ -36,16 +44,16 @@ class Verify extends Component {
        postData('verify-code', this.state).then((result)=>{
          const {history} = this.props
          let response = result;
-         if(localStorage.getItem('user_token')){
-            let token = localStorage.getItem('user_token');
+         if(this.state.token){
+            let token = this.state.token
             if(response._meta.status_code == 200 && response._meta.success == true){
                 let message = response._meta.message;
-                window.location.href = '/dashboard'
+                location.href = '/dashboard'
             }else{
                 if(response._meta && response._meta.error){
                     
                     alert("Message: "+ response._meta.error.message)
-                    window.location.href = '/login'
+                    location.href = '/login'
                 }
                 
             }
@@ -58,9 +66,11 @@ class Verify extends Component {
     }
 
     getUsername(){
-        let data = localStorage.getItem('user');
-        console.log(JSON.parse(data))
-        return JSON.parse(data);
+        var data = this.state.user
+		if(data != "" && data != 'undefined'){
+        //console.log(JSON.parse(data)
+			return JSON.parse(data).email;
+		}
     }
     onChange(e){
       this.setState({[e.target.name]:e.target.value});
